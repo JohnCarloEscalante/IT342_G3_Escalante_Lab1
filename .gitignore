@@ -1,0 +1,42 @@
+# Backend - Java
+backend/target/
+backend/.gradle/
+backend/build/
+backend/.settings/
+backend/.classpath
+backend/.project
+backend/.factorypath
+backend/.metadata/
+
+# Frontend - React
+web/node_modules/
+web/.env.local
+web/.env.development.local
+web/.env.test.local
+web/.env.production.local
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/.eslintcache
+web/coverage/
+web/build/
+web/.next/
+web/out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files (H2/SQLite)
+*.db
+*.h2.db
+*.mv.db

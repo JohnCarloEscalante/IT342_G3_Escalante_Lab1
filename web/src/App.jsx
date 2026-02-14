@@ -5,58 +5,55 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Components
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
-
-// Pages
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-
-// Context
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
-
-// Styles
+import LoadingSpinner from './components/common/LoadingSpinner';
 import './styles/App.css';
+
+// Wrapper component to use auth
+const AppContent = () => {
+  const { loading } = useAuth();
+  
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  
+  return (
+    <div className="app-container">
+      <Navbar />
+      <Container className="main-content py-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Container>
+      <Footer />
+      <ToastContainer />
+    </div>
+  );
+};
 
 function App() {
   return (
-    <Router>  {/* Router must be OUTSIDE AuthProvider */}
-      <AuthProvider>  {/* Now AuthProvider is INSIDE Router */}
-        <div className="app-container">
-          <Navbar />
-          <Container className="main-content py-4">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route 
-                path="/dashboard" 
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </Container>
-          <Footer />
-          <ToastContainer 
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </div>
+    <Router>
+      <AuthProvider>
+        <AppContent />
       </AuthProvider>
     </Router>
   );

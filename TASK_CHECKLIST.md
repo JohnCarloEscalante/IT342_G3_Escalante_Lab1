@@ -1,15 +1,15 @@
 # Task Checklist
 
 ## DONE
-- Initialize Spring Boot project (commit: abc123)
-- Create User entity class (commit: def456)
-- Implement BCrypt password encoding (commit: jkl012)
-- Create Register API endpoint (commit: mno345)
 
 ## IN-PROGRESS
 - Implement JWT token generation
 - Create Login API endpoint
 - Add protected /api/user/me endpoint
+- Initialize Spring Boot project
+- Create User entity class
+- Implement BCrypt password encoding
+- Create Register API endpoint
 
 ## TODO
 - Implement React Register page
